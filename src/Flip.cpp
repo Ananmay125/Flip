@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
     int currentFrame = 0;
     Uint64 lastFrameTime = SDL_GetTicks();
 
-    bool isRunning = true, isDragging = false, isLocked = false, isPlaying = false;
+    bool isRunning = true, isDragging = false, isLocked = false, isPlaying = false, isPaused = false;
     float grabX = 0, grabY = 0;
 
     while (isRunning) {
@@ -143,6 +143,10 @@ int main(int argc, char* argv[]) {
                 }
             }
 
+            if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_MIDDLE) {
+                isPaused = !isPaused;
+            }
+
             if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) isDragging = false;
         }
 
@@ -153,11 +157,12 @@ int main(int argc, char* argv[]) {
         }
 
         Uint64 now = SDL_GetTicks();
-        if ((int)(now - lastFrameTime) >= delays[currentFrame]) {
-            currentFrame = (currentFrame + 1) % frames.size();
-            lastFrameTime = now;
+        if (!isPaused && !frames.empty()) {
+            if ((int)(now - lastFrameTime) >= delays[currentFrame]) {
+                currentFrame = (currentFrame + 1) % frames.size();
+                lastFrameTime = now;
+            }
         }
-
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         SDL_RenderClear(renderer);
         SDL_FRect rect = { 0, 0, (float)windowWidth, (float)windowHeight };
