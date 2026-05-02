@@ -3,6 +3,27 @@
 #include <SDL3_mixer/SDL_mixer.h>
 #include <iostream>
 #include <vector>
+void ChangePetguy(const char *dude, SDL_Renderer* renderer, std::vector<SDL_Texture*>& frames,std::vector<int>& delays,int& currentFrame) {
+    //goon
+    for (SDL_Texture* tex : frames)
+    {
+        SDL_DestroyTexture(tex);
+    }
+    frames.clear();
+    delays.clear();
+    currentFrame = 0;
+
+    IMG_Animation* newanim = IMG_LoadAnimation(dude);
+    if (newanim) {
+        for (int i = 0; i < newanim->count; i++) {
+            SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, newanim->frames[i]);
+            SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
+            frames.push_back(tex);
+            delays.push_back(newanim->delays[i]);
+        }
+    }
+    IMG_FreeAnimation(newanim);
+}
 
 int main(int argc, char* argv[]) {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -18,11 +39,12 @@ int main(int argc, char* argv[]) {
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    const char* dude = "resources/gamblecore.gif";
 
     MIX_Mixer* mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
     MIX_Audio* sound = MIX_LoadAudio(mixer, "resources/gamblecore.wav", true);
 
-    IMG_Animation* anim = IMG_LoadAnimation("resources/gamblecore.gif");
+    IMG_Animation* anim = IMG_LoadAnimation(dude);
     std::vector<SDL_Texture*> frames;
     std::vector<int> delays; 
 
@@ -45,6 +67,62 @@ int main(int argc, char* argv[]) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_EVENT_QUIT) isRunning = false;
             if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_ESCAPE) isRunning = false;
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_1) {
+                ChangePetguy("resources/gamblecore.gif", renderer, frames, delays, currentFrame);
+
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_2) {
+                ChangePetguy("resources/teto.gif", renderer, frames, delays, currentFrame);
+
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_3) {
+                ChangePetguy("resources/hard.gif", renderer, frames, delays, currentFrame);
+
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_4) {
+                ChangePetguy("resources/kevin.gif", renderer, frames, delays, currentFrame);
+
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_5) {
+                ChangePetguy("resources/goober.gif", renderer, frames, delays, currentFrame);
+
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_6) {
+                ChangePetguy("resources/explode.gif", renderer, frames, delays, currentFrame);
+
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_7) {
+                ChangePetguy("resources/meme.gif", renderer, frames, delays, currentFrame);
+
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_8) {
+                ChangePetguy("teto.gif", renderer, frames, delays, currentFrame);
+
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_9) {
+                ChangePetguy("teto.gif", renderer, frames, delays, currentFrame);
+
+            }
+            
+
 
             if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_P) {
                 isLocked = !isLocked;
