@@ -1,21 +1,46 @@
-﻿# CMakeList.txt : CMake project for Flip, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿# CMakeList.txt
+cmake_minimum_required(VERSION 3.21)
 
-# Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("Flip")
+project("Flip")
 
-# Add source to this project's executable.
-add_executable (Flip "src/Flip.cpp" "src/Flip.h")
+list(APPEND CMAKE_PREFIX_PATH
+    "${CMAKE_SOURCE_DIR}/libs/SDL3-devel-3.4.6-VC"
+    "${CMAKE_SOURCE_DIR}/libs/SDL3-image-devel-vc"
+    "${CMAKE_SOURCE_DIR}/libs/SDL3_mixer-devel-3.2.0-VC"
+)
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Flip PROPERTY CXX_STANDARD 20)
+find_package(SDL3       REQUIRED CONFIG)
+find_package(SDL3_image REQUIRED CONFIG)
+find_package(SDL3_mixer REQUIRED CONFIG)
+
+add_executable(Flip "src/Flip.cpp" )
+
+set_property(TARGET Flip PROPERTY CXX_STANDARD 20)
+
+target_link_libraries(Flip PRIVATE
+    SDL3::SDL3
+    SDL3_image::SDL3_image
+    SDL3_mixer::SDL3_mixer
+)
+
+# dont mind ts
+add_custom_command(TARGET Flip POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_CURRENT_SOURCE_DIR}/resources"
+    "$<TARGET_FILE_DIR:Flip>/resources"
+)
+
+if(WIN32)
+    add_custom_command(TARGET Flip POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_RUNTIME_DLLS:Flip>
+            $<TARGET_FILE_DIR:Flip>
+        COMMAND_EXPAND_LISTS
+        COMMENT "Copying SDL3 DLLs -> build dir"
+    )
 endif()
-
-# TODO: Add tests and install targets if needed.
