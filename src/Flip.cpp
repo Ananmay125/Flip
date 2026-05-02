@@ -113,12 +113,12 @@ int main(int argc, char* argv[]) {
             }
 
             if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_8) {
-                ChangePetguy("teto.gif", renderer, frames, delays, currentFrame);
+                ChangePetguy("resources/teto.gif", renderer, frames, delays, currentFrame);
 
             }
 
             if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_9) {
-                ChangePetguy("teto.gif", renderer, frames, delays, currentFrame);
+                ChangePetguy("resources/teto.gif", renderer, frames, delays, currentFrame);
 
             }
             
