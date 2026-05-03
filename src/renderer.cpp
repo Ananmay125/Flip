@@ -71,7 +71,7 @@ void Window::render(bool isPaused) {
         SDL_RenderTexture(renderer, frames[currentFrame], NULL, &rect);
     }
 
-    SDL_RenderPresent(renderer);
+    //SDL_RenderPresent(renderer);
 }
 
 void Window::setPositionBottomRight() {

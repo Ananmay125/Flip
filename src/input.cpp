@@ -102,3 +102,8 @@ void InputHandler::updateDragging(SDL_Window* window) {
             (int)(my - grabY));
     }
 }
+
+void InputHandler::setAnimation(const char* path, void(*changeAnim)(const char*)) {
+    currentGif = path;
+    changeAnim(currentGif);
+}

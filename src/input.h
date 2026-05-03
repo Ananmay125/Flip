@@ -21,4 +21,5 @@ public:
 
     void handleEvent(SDL_Event& event, SDL_Window* window, void(*changeAnim)(const char*));
     void updateDragging(SDL_Window* window);
+    void setAnimation(const char* path, void(*changeAnim)(const char*));
 };

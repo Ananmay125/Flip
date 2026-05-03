@@ -1,4 +1,4 @@
-﻿# CMakeList.txt
+﻿# CMakeLists.txt
 cmake_minimum_required(VERSION 3.21)
 
 if (POLICY CMP0141)
@@ -12,13 +12,16 @@ list(APPEND CMAKE_PREFIX_PATH
     "${CMAKE_SOURCE_DIR}/libs/SDL3-devel-3.4.6-VC"
     "${CMAKE_SOURCE_DIR}/libs/SDL3-image-devel-vc"
     "${CMAKE_SOURCE_DIR}/libs/SDL3_mixer-devel-3.2.0-VC"
+    "${CMAKE_SOURCE_DIR}/libs/SDL3_ttf-devel-3.2.0-VC" 
 )
 
 find_package(SDL3       REQUIRED CONFIG)
 find_package(SDL3_image REQUIRED CONFIG)
 find_package(SDL3_mixer REQUIRED CONFIG)
 
-add_executable(Flip "src/Flip.cpp"  "src/input.cpp"  "src/renderer.cpp" "src/renderer.h")
+find_package(SDL3_ttf   REQUIRED CONFIG) 
+
+add_executable(Flip "src/Flip.cpp"  "src/input.cpp"  "src/renderer.cpp" "src/renderer.h" "src/Interface.h" "src/Interface.cpp")
 
 set_property(TARGET Flip PROPERTY CXX_STANDARD 20)
 
@@ -26,6 +29,7 @@ target_link_libraries(Flip PRIVATE
     SDL3::SDL3
     SDL3_image::SDL3_image
     SDL3_mixer::SDL3_mixer
+    SDL3_ttf::SDL3_ttf
 )
 
 # dont mind ts
