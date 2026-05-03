@@ -17,3 +17,6 @@ Makefile
 *.lib
 *.so
 *.a
+
+# other stuff 
+.claudiaideconfig
