@@ -19,31 +19,37 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
 
         case SDLK_1:
             currentGif = "resources/Blue-guy/gamblecore.gif";
+            isBlue();
             changeAnim(currentGif);
             break;
 
         case SDLK_2:
             currentGif = "resources/Teto/teto.gif";
+            isTeto();
             changeAnim(currentGif);
             break;
 
         case SDLK_3:
             currentGif = "resources/Blue-guy/hard.gif";
+            isBlue();
             changeAnim(currentGif);
             break;
 
         case SDLK_4:
             currentGif = "resources/kevin/kevin.gif";
+            isBlue();
             changeAnim(currentGif);
             break;
 
         case SDLK_5:
             currentGif = "resources/Red-guy/explode.gif";
+            isRed();
             changeAnim(currentGif);
             break;
 
         case SDLK_6:
             currentGif = "resources/Blue-guy/meme.gif";
+            isBlue();
             changeAnim(currentGif);
             break;
 
@@ -60,7 +66,21 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
 
             if (!isBeingHeld) {
                 isBeingHeld = true;
-                changeAnim("resources/Blue-guy/goober.gif");
+                if (teto == true) {
+                    SDL_Log("Teto Pet");
+                    changeAnim("resources/Teto/pet.gif");
+                }
+                else if (redguy == true)
+                {
+                    SDL_Log("Red Baby");
+                    changeAnim("resources/Red-guy/goober.gif");
+                }
+                else
+                {
+                    SDL_Log("Not Teto Pet");
+                    changeAnim("resources/Blue-guy/goober.gif");
+                }
+           
             }
 
             if (!isLocked) {

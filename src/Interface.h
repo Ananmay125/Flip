@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <functional>
+#include "input.h"
 
 struct MenuItem {
     std::string text;

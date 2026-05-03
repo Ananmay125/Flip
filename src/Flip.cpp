@@ -23,15 +23,18 @@ int main(int argc, char* argv[]) {
     ui.init("resources/fonts/PixelPurl.ttf", 16);
 
     ui.addMenuItem("Play Gamble", [&input]() {
+        input.isBlue();
         input.setAnimation("resources/Blue-guy/gamblecore.gif", ChangeAnim);
         });
 
     ui.addMenuItem("Play Teto", [&input]() {
         input.setAnimation("resources/Teto/teto.gif", ChangeAnim);
+        input.isTeto();
         });
 
-    ui.addMenuItem("Play Kevin", [&input]() {
-        input.setAnimation("resources/kevin/kevin.gif", ChangeAnim);
+    ui.addMenuItem("Explode", [&input]() {
+        input.isRed();
+        input.setAnimation("resources/Red-guy/explode.gif", ChangeAnim);
         });
 
     ui.addMenuItem("Exit Game", []() {

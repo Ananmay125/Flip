@@ -1,6 +1,6 @@
 #include "interface.h"
 #include <iostream>
-
+#include "input.h"
 Interface::Interface() {
     TTF_Init();
 }
