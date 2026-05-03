@@ -12,6 +12,10 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
         isRunning = false;
 
     if (event.type == SDL_EVENT_KEY_DOWN) {
+        //man
+        
+
+
         switch (event.key.key) {
         case SDLK_ESCAPE:
             isRunning = false;
@@ -58,6 +62,14 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
             std::cout << (isLocked ? "Locked in\n" : "Not locked in\n");
             break;
         }
+
+        if (event.key.repeat == 0) {
+            secret(event.key.key, changeAnim);
+        }
+
+
+
+     
     }
 
     if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
@@ -74,6 +86,10 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
                 {
                     SDL_Log("Red Baby");
                     changeAnim("resources/Red-guy/goober.gif");
+                }
+                else if (p3 == true) {
+                    SDL_Log(".--. . .-. ... --- -. .- / ...--");
+                    changeAnim("resources/Secret/pet.gif");
                 }
                 else
                 {

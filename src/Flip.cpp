@@ -51,9 +51,7 @@ int main(int argc, char* argv[]) {
                     ChangeAnim);
             }
 
-            input.handleEvent(event,
-                SDL_GetRenderWindow(window.getRenderer()),
-                ChangeAnim);
+            
         }
 
         input.updateDragging(SDL_GetRenderWindow(window.getRenderer()));

@@ -21,7 +21,7 @@ find_package(SDL3_mixer REQUIRED CONFIG)
 
 find_package(SDL3_ttf   REQUIRED CONFIG) 
 
-add_executable(Flip "src/Flip.cpp"  "src/input.cpp"  "src/renderer.cpp" "src/renderer.h" "src/Interface.h" "src/Interface.cpp")
+add_executable(Flip "src/Flip.cpp"  "src/input.cpp"  "src/renderer.cpp" "src/renderer.h" "src/Interface.h" "src/Interface.cpp" "src/Secret.cpp")
 
 set_property(TARGET Flip PROPERTY CXX_STANDARD 20)
 
