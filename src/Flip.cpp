@@ -1,7 +1,9 @@
 ﻿#include "renderer.h"
 #include "input.h"
 #include "Interface.h"
+#include "audioPlayer.h"
 #include <SDL3_mixer/SDL_mixer.h>
+#include <time.h>
 
 Window* gWindow = nullptr;
 
@@ -10,6 +12,7 @@ void ChangeAnim(const char* path) {
 }
 
 int main(int argc, char* argv[]) {
+    srand(time(NULL));
    
     Window window("Flip", 150, 150);
     gWindow = &window;
@@ -18,6 +21,10 @@ int main(int argc, char* argv[]) {
 
     window.setPositionBottomRight();
     window.loadAnimation("resources/gamblecore.gif");
+    AudioPlayer audio;
+    audio.loadSound("blue", "resources/audio/gamblecore.wav");
+    audio.loadSound("teto", "resources/audio/teto.wav");
+    audio.loadSound("hate", "resources/audio/teto1.wav");
 
     Interface ui;
     ui.init("resources/fonts/PixelPurl.ttf", 16);
@@ -48,11 +55,12 @@ int main(int argc, char* argv[]) {
             if (!ui.handleEvent(event)) {
                 input.handleEvent(event,
                     SDL_GetRenderWindow(window.getRenderer()),
-                    ChangeAnim);
+                    ChangeAnim, &audio);
             }
 
             
         }
+        input.update(&audio);
 
         input.updateDragging(SDL_GetRenderWindow(window.getRenderer()));
 

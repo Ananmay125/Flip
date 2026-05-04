@@ -6,7 +6,11 @@ bool InputHandler::paused() const { return isPaused; }
 bool InputHandler::locked() const { return isLocked; }
 bool InputHandler::dragging() const { return isDragging; }
 
-void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*changeAnim)(const char*)) {
+void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*changeAnim)(const char*), AudioPlayer* audio) {
+
+    
+
+    
 
     if (event.type == SDL_EVENT_QUIT)
         isRunning = false;
@@ -29,6 +33,7 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
 
         case SDLK_2:
             currentGif = "resources/Teto/teto.gif";
+            audio -> play("teto");
             isTeto();
             changeAnim(currentGif);
             break;
@@ -65,6 +70,7 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
 
         if (event.key.repeat == 0) {
             secret(event.key.key, changeAnim);
+            
         }
 
 
@@ -142,4 +148,20 @@ void InputHandler::updateDragging(SDL_Window* window) {
 void InputHandler::setAnimation(const char* path, void(*changeAnim)(const char*)) {
     currentGif = path;
     changeAnim(currentGif);
+}
+
+//so u can make random sounds appear
+
+void InputHandler::update(AudioPlayer* audio) {
+    if (teto) {
+        Uint32 currentTime = SDL_GetTicks();
+
+        if (currentTime >= nextHateTime) {
+            audio->play("hate");
+
+            Uint32 Delay = (rand() % 75000) + 90000;
+            nextHateTime = currentTime + Delay;
+
+        }
+    }
 }
