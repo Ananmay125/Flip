@@ -33,7 +33,7 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
 
         case SDLK_2:
             currentGif = "resources/Teto/teto.gif";
-            audio -> play("peak");
+            audio -> play("teto");
             isTeto();
             changeAnim(currentGif);
             break;
@@ -184,8 +184,7 @@ void InputHandler::update(AudioPlayer* audio) {
         }
     }
 
-    if (p3)
-    {
+    if (p3 == true){
         if (audio->isFinished("aigis") ){
             if (audio->isFinished("peak")){
                 //audio->setVolume(0.6);
