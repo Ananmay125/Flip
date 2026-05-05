@@ -39,6 +39,9 @@ add_custom_command(TARGET Flip POST_BUILD
     "$<TARGET_FILE_DIR:Flip>/resources"
 )
 
+install(TARGETS Flip DESTINATION .)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/resources/" DESTINATION "resources")
+
 if(WIN32)
     add_custom_command(TARGET Flip POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
