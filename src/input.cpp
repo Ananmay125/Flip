@@ -1,6 +1,6 @@
 #include "input.h"
 #include <iostream>
-
+#include <chrono>
 bool InputHandler::running() const { return isRunning; }
 bool InputHandler::paused() const { return isPaused; }
 bool InputHandler::locked() const { return isLocked; }
@@ -33,7 +33,7 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
 
         case SDLK_2:
             currentGif = "resources/Teto/teto.gif";
-            audio -> play("teto");
+            audio -> play("peak");
             isTeto();
             changeAnim(currentGif);
             break;
@@ -71,6 +71,10 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
         if (event.key.repeat == 0) {
             secret(event.key.key, changeAnim);
             
+        }
+
+        if (p3) {
+            audio->play("aigis");
         }
 
 
@@ -157,11 +161,38 @@ void InputHandler::update(AudioPlayer* audio) {
         Uint32 currentTime = SDL_GetTicks();
 
         if (currentTime >= nextHateTime) {
-            audio->play("hate");
+            z = rand() % tetoac;
+            switch (z)
+            {
+            case 0:
+                audio->play("hate");
+                break;
+            case 1:
+                audio->play("tetoing");
+                break;
+            case 2:
+                audio->play("teto2");
+                break;
+            case 3:
+                audio->play("teto3");
+                break;
+            }
 
             Uint32 Delay = (rand() % 75000) + 90000;
             nextHateTime = currentTime + Delay;
 
         }
+    }
+
+    if (p3)
+    {
+        if (audio->isFinished("aigis") ){
+            if (audio->isFinished("peak")){
+                //audio->setVolume(0.6);
+                audio->play("peak");
+            }
+        }
+
+        
     }
 }

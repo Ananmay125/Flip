@@ -37,6 +37,8 @@ public:
     bool paused() const;
     bool locked() const;
     bool dragging() const;
+    int tetoac = 4; //Change this gng if adding teto audio clipss
+    int z = rand() % tetoac;
     void isTeto() {
         nextHateTime = SDL_GetTicks() + (rand() % 75000 + 90000);
         teto = true;
@@ -45,12 +47,14 @@ public:
     }
 
     void isRed() {
+        nextHateTime = 0;
         redguy = true;
         teto = false;
         p3 = false;
     }
 
     void isBlue() {
+        nextHateTime = 0;
         redguy = false;
         teto = false;
         p3 = false;
@@ -58,6 +62,7 @@ public:
     }
     
     void isSecret() {
+        nextHateTime = 0;
         redguy = false;
         teto = false;
         p3 = true;

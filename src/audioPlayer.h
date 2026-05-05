@@ -19,6 +19,7 @@ public:
     AudioPlayer();
     ~AudioPlayer();
     bool loadSound(const std::string& name, const char* path);
+    bool isFinished(const std::string& name);
     void play(const std::string& name);
     void setVolume(float gain); // 0.0 - 1.0
 };

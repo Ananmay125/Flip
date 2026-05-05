@@ -25,6 +25,11 @@ int main(int argc, char* argv[]) {
     audio.loadSound("blue", "resources/audio/gamblecore.wav");
     audio.loadSound("teto", "resources/audio/teto.wav");
     audio.loadSound("hate", "resources/audio/teto1.wav");
+    audio.loadSound("tetoing", "resources/audio/tetoing.wav");
+    audio.loadSound("teto2", "resources/audio/teto2.wav");
+    audio.loadSound("teto3", "resources/audio/teto2.wav");
+    audio.loadSound("aigis", "resources/audio/aigis.wav");
+    audio.loadSound("peak", "resources/audio/peak.wav");
 
     Interface ui;
     ui.init("resources/fonts/PixelPurl.ttf", 16);

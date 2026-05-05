@@ -39,9 +39,20 @@ void AudioPlayer::play(const std::string& name) {
     auto& clip = it->second;
     SDL_ClearAudioStream(clip.stream);
     SDL_PutAudioStreamData(clip.stream, clip.buf, (int)clip.len);
+    SDL_FlushAudioStream(clip.stream);
 }
 
 void AudioPlayer::setVolume(float gain) {
     for (auto& [name, clip] : sounds)
         SDL_SetAudioStreamGain(clip.stream, gain);
+}
+
+bool AudioPlayer::isFinished(const std::string& name) {
+    auto it = sounds.find(name);
+    if (it == sounds.end()) return true;
+
+    if (SDL_GetAudioStreamQueued(it->second.stream) == 0) {
+        return true;
+    }
+    return false;
 }
