@@ -10,6 +10,7 @@ private:
     bool isRunning = true;
     bool teto = false;
     bool redguy = false;
+    bool rei = false;
     bool blue = true;
     bool check1 = true;
     bool check2 = false;
@@ -44,6 +45,7 @@ public:
         teto = true;
         redguy = false;
         p3 = false;
+        rei = false;
     }
 
     void isRed() {
@@ -51,6 +53,7 @@ public:
         redguy = true;
         teto = false;
         p3 = false;
+        rei = false;
     }
 
     void isBlue() {
@@ -59,6 +62,7 @@ public:
         teto = false;
         p3 = false;
         blue = true;
+        rei = false;
     }
     
     void isSecret() {
@@ -66,6 +70,15 @@ public:
         redguy = false;
         teto = false;
         p3 = true;
+        rei = false;
+    }
+
+    void isRei() {
+        nextHateTime = 0;
+        redguy = false;
+        teto = false;
+        p3 = false;
+        rei = true;
     }
 
     void gifchange(const char* Epic) {

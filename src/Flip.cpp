@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
     InputHandler input;
 
     window.setPositionBottomRight();
-    window.loadAnimation("resources/gamblecore.gif");
+    window.loadAnimation("resources/Blue-guy/gamblecore.gif");
     AudioPlayer audio;
     audio.loadSound("blue", "resources/audio/gamblecore.wav");
     audio.loadSound("teto", "resources/audio/teto.wav");
@@ -42,6 +42,11 @@ int main(int argc, char* argv[]) {
     ui.addMenuItem("Play Teto", [&input]() {
         input.setAnimation("resources/Teto/teto.gif", ChangeAnim);
         input.isTeto();
+        });
+
+    ui.addMenuItem("Rei(Requested Item)", [&input]() {
+        input.setAnimation("resources/Rei/rei.gif", ChangeAnim);
+        input.isRei();
         });
 
     ui.addMenuItem("Explode", [&input]() {

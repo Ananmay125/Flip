@@ -62,6 +62,12 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
             changeAnim(currentGif);
             break;
 
+        case SDLK_7:
+            currentGif = "resources/Rei/rei.gif";
+            isRei();
+            changeAnim(currentGif);
+            break;
+
         case SDLK_P:
             isLocked = !isLocked;
             std::cout << (isLocked ? "Locked in\n" : "Not locked in\n");
@@ -100,6 +106,9 @@ void InputHandler::handleEvent(SDL_Event& event, SDL_Window* window, void(*chang
                 else if (p3 == true) {
                     SDL_Log(".--. . .-. ... --- -. .- / ...--");
                     changeAnim("resources/Secret/pet.gif");
+                }
+                else if (rei == true) {
+                    changeAnim("resources/Rei/rei-grab.gif");
                 }
                 else
                 {
